@@ -36,8 +36,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR....
       - aws --version
-      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin YOUR_AWS_ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com
-      - REPOSITORY_URI=YOUR_AWS_ACCOUNT_ID.dkr.ecr.ap-south-1.amazonaws.com/nodejs-demo-ecr
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 829903283215.dkr.ecr.ap-south-1.amazonaws.com
+      - REPOSITORY_URI=829903283215.dkr.ecr.ap-south-1.amazonaws.com/docker_ci-cd
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
       - echo Logging in to Docker Hub...
       - echo ${doc_password} | docker login -u ${doc_usname} --password-stdin
@@ -50,7 +50,7 @@ phases:
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-      - docker tag $REPOSITORY_URI:latest your-dockerhub-username/your-image-name:latest
+      - docker tag $REPOSITORY_URI:latest dtharundev/$REPOSITORY_URI:latest
 
   post_build:
     commands:
