@@ -40,6 +40,8 @@ phases:
       - REPOSITORY_URI=829903283215.dkr.ecr.ap-south-1.amazonaws.com/docker_ci-cd
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
       - echo Logging in to Docker Hub...
+      - echo password 
+      - echo ${doc_password} 
       - echo ${doc_password} | docker login -u ${doc_usname} --password-stdin
 
   build:
